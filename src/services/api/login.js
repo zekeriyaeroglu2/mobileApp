@@ -2,6 +2,8 @@ import axios from 'axios';
 import {showMessage} from 'react-native-flash-message';
 import DeviceInfo from 'react-native-device-info';
 
+import DateHelper from '../../helper/dateHelper';
+
 const CONTROLLER = '/login';
 
 const brand = DeviceInfo.getBrand();
@@ -17,7 +19,7 @@ DeviceInfo.getMacAddress().then(macAddress => {
   mac = macAddress;
 });
 
-function logCustomer(customerCode, isSuccess) {
+function logLogin(customerCode, isSuccess, userMail = '') {
   var fd = new FormData();
   fd.append('customerCode', customerCode);
   fd.append('isSuccess', parseInt(isSuccess));
@@ -28,8 +30,17 @@ function logCustomer(customerCode, isSuccess) {
   fd.append('ipAdress', ip);
   fd.append('macAdress', mac);
 
+  if (userMail !== '') {
+    fd.append('userMail', userMail);
+    fd.append('type', 2);
+  } else {
+    fd.append('type', 1);
+  }
+
+  fd.append('addDate', DateHelper.getCurDate());
+
   axios
-    .post(global.API_URL + CONTROLLER + '/logCustomer', fd)
+    .post(global.API_URL + CONTROLLER + '/logLogin', fd)
     .then(response => {
       if (response.data.success) {
         console.log('customer logged');
@@ -42,28 +53,28 @@ function logCustomer(customerCode, isSuccess) {
 
 export function selectCustomer(customerCode, callback) {
   axios
-    .get(global.API_URL + CONTROLLER + '/getCustomerInfo/' + customerCode)
+    .get(global.API_URL + CONTROLLER + '/customer/code/' + customerCode)
     .then(response => {
-      if (response.data.success) {
-        callback(response.data.message);
-        logCustomer(customerCode, 1);
-      } else {
+      callback(response.data);
+      logLogin(customerCode, 1);
+    })
+    .catch(error => {
+      if (!error.response) {
         showMessage({
-          message: response.data.message,
+          message: 'Sunucu hatası.',
           type: 'danger',
           icon: {icon: 'auto', position: 'left'},
         });
         callback(false);
-        logCustomer(customerCode, 0);
+      } else {
+        showMessage({
+          message: error.response.data.message,
+          type: 'danger',
+          icon: {icon: 'auto', position: 'left'},
+        });
+        callback(false);
+        logLogin(customerCode, 0);
       }
-    })
-    .catch(error => {
-      showMessage({
-        message: 'Sunucuya bağlanırken bir hata oluştu.',
-        type: 'danger',
-        icon: {icon: 'auto', position: 'left'},
-      });
-      console.log('asd');
     });
 }
 
@@ -73,10 +84,10 @@ export function userLogin(email, password, customerCode, callback) {
   fd.append('password', password);
   fd.append('customerCode', customerCode);
   axios
-    .post(global.API_URL + CONTROLLER + '/userLogin', fd)
+    .post(global.API_URL + CONTROLLER + '/user', fd)
     .then(response => {
-      if (response.data.success) {
-        callback(response.data.message);
+      if (response.data) {
+        callback(response.data);
       } else {
         showMessage({
           message: response.data.message,
@@ -87,12 +98,22 @@ export function userLogin(email, password, customerCode, callback) {
       }
     })
     .catch(error => {
-      console.log(error);
-      showMessage({
-        message: 'Sunucuya bağlanırken bir hata oluştu.',
-        type: 'danger',
-        icon: {icon: 'auto', position: 'left'},
-      });
+      if (!error.response) {
+        showMessage({
+          message: 'Sunucu hatası.',
+          type: 'danger',
+          icon: {icon: 'auto', position: 'left'},
+        });
+        callback(false);
+      } else {
+        showMessage({
+          message: error.response.data.message,
+          type: 'danger',
+          icon: {icon: 'auto', position: 'left'},
+        });
+        callback(false);
+        //logLogin(customerCode, 0);
+      }
     });
 }
 

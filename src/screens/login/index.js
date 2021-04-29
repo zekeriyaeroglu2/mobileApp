@@ -126,12 +126,14 @@ const LoginScreen = ({route, navigation}) => {
     }
     loginAPI.userLogin(email, password, customer.customerCode, userData => {
       if (userData) {
+        console.log(userData);
         showMessage({
           message: 'Kullanıcı giriş işlemi başarılı.',
           type: 'success',
           icon: {icon: 'auto', position: 'left'},
         });
-        AsyncStorage.setItem('userData', userData);
+        AsyncStorage.setItem('userData', JSON.stringify(userData));
+        AsyncStorage.setItem('token', JSON.stringify(userData.token));
         navigation.navigate('home');
       } else {
         setIsLoading(false);
@@ -179,12 +181,14 @@ const LoginScreen = ({route, navigation}) => {
             style={styles.email}
             placeholder="E-Posta Adresi"
             onChangeText={setEmail}
+            placeholderTextColor="black"
           />
           <TextInput
             style={styles.password}
             placeholder="Şifre"
             onChangeText={setPassword}
             secureTextEntry={true}
+            placeholderTextColor="black"
           />
           <TouchableOpacity
             onPress={checkForm}

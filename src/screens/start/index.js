@@ -30,7 +30,7 @@ const StartScreen = ({navigation}) => {
 
   const getCustomerTryCount = async () => {
     try {
-      //await AsyncStorage.clear();
+      await AsyncStorage.clear();
       const cusTryCount = await AsyncStorage.getItem('@customerTryCount');
       const cusBlockDate = await AsyncStorage.getItem('@customerBlockDate');
       const cusBlockHm = await AsyncStorage.getItem('@customerBlockHm');
@@ -90,6 +90,7 @@ const StartScreen = ({navigation}) => {
           if (tryNum >= 4) {
             setCustomerTryCount();
           }
+          setIsLoading(false);
         }
       });
     }
@@ -122,6 +123,7 @@ const StartScreen = ({navigation}) => {
             value={customerCode}
             onChangeText={setCustomerCode}
             keyboardType={'number-pad'}
+            placeholderTextColor="black"
           />
           <TouchableOpacity
             onPress={checkCustomerCode}

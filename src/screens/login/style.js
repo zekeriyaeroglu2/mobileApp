@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     borderColor: '#1b4074',
+    color: 'black',
   },
   password: {
     height: 50,
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     borderColor: '#1b4074',
+    color: 'black',
   },
   signIn: {
     width: '100%',
