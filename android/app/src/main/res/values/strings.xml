@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">mobile</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">IUMzSkwc2sO7ug14CwYAEpnsD-smCyI18Qe9n</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
-    <string name="CodePushDeploymentKey" moduleConfig="true" >IUMzSkwc2sO7ug14CwYAEpnsD-smCyI18Qe9n</string>
     <string name="CodePushPublicKey">-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtPSR9lkGzZ4FR0lxF+ZA
 P6jJ8+Xi5L601BPN4QESoRVSrJM08roOCVrs4qoYqYJy3Of2cQWvNBEh8ti3FhHu

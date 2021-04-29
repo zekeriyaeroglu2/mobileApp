@@ -3,11 +3,14 @@ import type {Node} from 'react';
 import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
 import AppNavigation from './routing/AppNavigation';
 import NetInfo from '@react-native-community/netinfo';
+import codePush from 'react-native-code-push';
 
 import Analytics from 'appcenter-analytics';
 
 //global
 global.API_URL = 'https://proapp.codigno.com/index.php';
+
+let codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
 
 const App = () => {
   const [connect, setConnect] = React.useState(true);
@@ -22,6 +25,11 @@ const App = () => {
     });
 
     unsubscribe;
+
+    codePush.sync({
+      updateDialog: true,
+      installMode: codePush.InstallMode.IMMEDIATE,
+    });
   }, [connect]);
 
   if (connect) {
@@ -65,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default codePush(codePushOptions)(App);
