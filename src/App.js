@@ -10,8 +10,6 @@ import Analytics from 'appcenter-analytics';
 //global
 global.API_URL = 'https://proapp.codigno.com/index.php';
 
-let codePushOptions = {checkFrequency: codePush.CheckFrequency.ON_APP_RESUME};
-
 const App = () => {
   const [connect, setConnect] = React.useState(true);
   Analytics.trackEvent('My custom event');
@@ -25,11 +23,6 @@ const App = () => {
     });
 
     unsubscribe;
-
-    codePush.sync({
-      updateDialog: true,
-      installMode: codePush.InstallMode.IMMEDIATE,
-    });
   }, [connect]);
 
   if (connect) {
@@ -72,5 +65,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+let codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  updateDialog: true,
+  installMode: codePush.InstallMode.IMMEDIATE,
+};
 
 export default codePush(codePushOptions)(App);
