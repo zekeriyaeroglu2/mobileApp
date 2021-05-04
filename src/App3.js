@@ -1,18 +1,15 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import {View, Image, Text, StyleSheet, Dimensions} from 'react-native';
-
+import * as React from 'react';
+import type {Node} from 'react';
+import {View, Text, StyleSheet, Image, Dimensions} from 'react-native';
+import AppNavigation from './routing/AppNavigation';
 import NetInfo from '@react-native-community/netinfo';
 import codePush from 'react-native-code-push';
 
-import Provider from './context/Provider';
-
-import Routing from './routing/Routing';
+import Analytics from 'appcenter-analytics';
 
 //global
-//global.API_URL = 'http://192.168.1.22/proapp';
-
-global.API_URL = 'https://proapp.codigno.com/index.php';
+//global.API_URL = 'https://proapp.codigno.com/index.php';
+global.API_URL = 'http://192.168.1.22/proapp';
 
 const App = () => {
   const [connect, setConnect] = React.useState(true);
@@ -30,11 +27,7 @@ const App = () => {
   }, [connect]);
 
   if (connect) {
-    return (
-      <Provider>
-        <Routing />
-      </Provider>
-    );
+    return <AppNavigation />;
   } else {
     return (
       <View style={styles.container}>
