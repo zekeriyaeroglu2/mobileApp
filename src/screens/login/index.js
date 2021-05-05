@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Text,
   View,
@@ -6,6 +6,8 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
+
+import Context from '../../context/store';
 
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -26,13 +28,15 @@ const LoginScreen = ({route, navigation}) => {
   const [logo, setLogo] = useState();
   const [color, setColor] = useState();
 
+  const {state, dispatch} = useContext(Context);
+
   useEffect(() => {
     let componentMounted = true;
 
     getUserLoginTryCount();
 
     const _setCustomer = () => {
-      //await AsyncStorage.clear();
+      //AsyncStorage.clear();
       AsyncStorage.getItem('customerData').then(cusData => {
         if (cusData != null) {
           let parsedCusData = JSON.parse(cusData);
@@ -43,6 +47,7 @@ const LoginScreen = ({route, navigation}) => {
             setColor(parsedCusInfo.backgroundColor);
             setPageLoading(false);
           }
+        } else {
         }
       });
     };
@@ -124,9 +129,9 @@ const LoginScreen = ({route, navigation}) => {
       setIsLoading(false);
       return;
     }
+
     loginAPI.userLogin(email, password, customer.customerCode, userData => {
       if (userData) {
-        console.log(userData);
         showMessage({
           message: 'Kullanıcı giriş işlemi başarılı.',
           type: 'success',
@@ -134,7 +139,9 @@ const LoginScreen = ({route, navigation}) => {
         });
         AsyncStorage.setItem('userData', JSON.stringify(userData));
         AsyncStorage.setItem('token', JSON.stringify(userData.token));
-        navigation.navigate('home');
+        let token = userData.token;
+        dispatch({type: 'TOKEN', token});
+        //navigation.navigate('home');
       } else {
         setIsLoading(false);
         setTryNum(tryNum + 1);

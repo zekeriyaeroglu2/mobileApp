@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Text,
   View,
@@ -6,6 +6,9 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
+
+import Context from '../../context/store';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
@@ -19,6 +22,8 @@ const StartScreen = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tryNum, setTryNum] = useState(0);
   const [blockDate, setBlockDate] = useState('');
+
+  const {state, dispatch} = useContext(Context);
 
   useEffect(() => {
     getCustomerTryCount();
@@ -79,7 +84,8 @@ const StartScreen = ({navigation}) => {
       loginAPI.selectCustomer(customerCode, data => {
         if (data) {
           AsyncStorage.setItem('customerData', JSON.stringify(data));
-          navigation.navigate('login');
+          dispatch({type: 'CUSTOMER_CODE', customerCode});
+          //navigation.navigate('login');
           showMessage({
             message: 'Müşteri seçme işlemi başarılı.',
             type: 'success',

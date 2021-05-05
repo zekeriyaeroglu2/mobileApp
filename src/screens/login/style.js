@@ -66,6 +66,11 @@ const styles = StyleSheet.create({
   blockText: {
     color: 'red',
   },
+  loader: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
