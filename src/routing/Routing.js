@@ -15,6 +15,7 @@ import StartScreen from '../screens/start';
 import LoginScreen from '../screens/login';
 
 import SplashScreen from '../screens/splash';
+import FileUpload from '../screens/fileUpload';
 import TabNavigator from './TabNavigator';
 import QRScanner from '../components/QRScanner';
 
@@ -85,6 +86,11 @@ const Routing = () => {
               name="qrscanner"
               component={QRScanner}
               options={{headerShown: true, title: 'QR Kod Okuyucu'}}
+            />
+            <Stack.Screen
+              name="fileupload"
+              component={FileUpload}
+              options={{headerShown: true, title: 'Dosya Yükle'}}
             />
           </>
         )}

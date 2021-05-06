@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 
 import {
   AppRegistry,
@@ -11,43 +11,33 @@ import {
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 
-const QRScanner = () => {
+const QRScanner = ({navigation}) => {
+  const [message, setmessage] = useState('');
+  const [vibrate, setvibrate] = useState(true);
+
   const onSuccess = data => {
-    alert(data.data);
+    if (data.data.charAt(0) === '{') {
+      setvibrate(true);
+      navigation.navigate('home');
+      navigation.navigate('fileupload', {data: data.data});
+    } else {
+      setmessage('QR Kod tanımlanamadı. Lütfen tekrar deneyiniz.');
+      setvibrate(false);
+      this.scanner.reactivate();
+    }
   };
 
   return (
     <QRCodeScanner
       onRead={onSuccess}
-      flashMode={RNCamera.Constants.FlashMode.torch}
-      topContent={
-        <Text style={styles.centerText}>
-          Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text>{' '}
-          on your computer and scan the QR code.
-        </Text>
-      }
+      flashMode={RNCamera.Constants.FlashMode.off}
+      ref={node => {
+        this.scanner = node;
+      }}
+      vibrate={vibrate}
+      bottomContent={<Text>{message}</Text>}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
-  },
-});
 
 export default QRScanner;
