@@ -6,6 +6,9 @@ export function reducer(state, action) {
     case 'TOKEN':
       state.token = action.token;
       return {...state};
+    case 'USER_EMAIL':
+      state.userEmail = action.userEmail;
+      return {...state};
 
     default:
       return state;

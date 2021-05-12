@@ -29,32 +29,36 @@ const Routing = () => {
   const {state, dispatch} = useContext(Context);
 
   useEffect(() => {
+    const authCustomer = async () => {
+      const customerCode = await AsyncStorage.getItem('customerCode');
+      if (customerCode) {
+        dispatch({type: 'CUSTOMER_CODE', customerCode: customerCode});
+        setcustomer(true);
+      } else {
+        setcustomer(false);
+      }
+      setloading(false);
+    };
+
     authCustomer();
-  }, [state.customerCode]);
+  }, [dispatch, state.customerCode]);
 
   useEffect(() => {
+    const authUser = async () => {
+      const token = await AsyncStorage.getItem('token');
+      const userEmail = await AsyncStorage.getItem('userEmail');
+      if (token) {
+        dispatch({type: 'TOKEN', token: token});
+        dispatch({type: 'USER_EMAIL', userEmail});
+        setuser(true);
+      } else {
+        setuser(false);
+      }
+      setloading(false);
+    };
+
     authUser();
-  }, [state.token]);
-
-  const authCustomer = async () => {
-    const cusData = await AsyncStorage.getItem('customerData');
-    if (cusData) {
-      setcustomer(true);
-    } else {
-      setcustomer(false);
-    }
-    setloading(false);
-  };
-
-  const authUser = async () => {
-    const token = await AsyncStorage.getItem('token');
-    if (token) {
-      setuser(true);
-    } else {
-      setuser(false);
-    }
-    setloading(false);
-  };
+  }, [dispatch, state.token]);
 
   if (loading) {
     return <SplashScreen />;

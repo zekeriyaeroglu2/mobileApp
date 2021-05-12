@@ -137,10 +137,13 @@ const LoginScreen = ({route, navigation}) => {
           type: 'success',
           icon: {icon: 'auto', position: 'left'},
         });
-        AsyncStorage.setItem('userData', JSON.stringify(userData));
-        AsyncStorage.setItem('token', JSON.stringify(userData.token));
         let token = userData.token;
+        let userEmail = userData.userEmail;
+        AsyncStorage.setItem('userData', JSON.stringify(userData));
+        AsyncStorage.setItem('token', token);
+        AsyncStorage.setItem('userEmail', userEmail);
         dispatch({type: 'TOKEN', token});
+        dispatch({type: 'USER_EMAIL', userEmail});
         //navigation.navigate('home');
       } else {
         setIsLoading(false);

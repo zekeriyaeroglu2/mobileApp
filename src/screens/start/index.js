@@ -84,6 +84,7 @@ const StartScreen = ({navigation}) => {
       loginAPI.selectCustomer(customerCode, data => {
         if (data) {
           AsyncStorage.setItem('customerData', JSON.stringify(data));
+          AsyncStorage.setItem('customerCode', customerCode);
           dispatch({type: 'CUSTOMER_CODE', customerCode});
           //navigation.navigate('login');
           showMessage({

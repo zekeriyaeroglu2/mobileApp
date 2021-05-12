@@ -39,7 +39,8 @@ const AccountScreen = ({route, navigation}) => {
 
   const logout = async () => {
     await AsyncStorage.clear();
-    navigation.navigate('start');
+    dispatch({type: 'TOKEN', token: ''});
+    dispatch({type: 'CUSTOMER_CODE', customerCode: ''});
   };
 
   if (loading) {

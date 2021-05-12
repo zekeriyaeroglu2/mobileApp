@@ -6,6 +6,9 @@ export const initialState = {
     ? AsyncStorage.getItem('customerCode')
     : '',
   token: AsyncStorage.getItem('token') ? AsyncStorage.getItem('token') : '',
+  userEmail: AsyncStorage.getItem('userEmail')
+    ? AsyncStorage.getItem('userEmail')
+    : '',
 };
 
 // eslint-disable-next-line no-undef
