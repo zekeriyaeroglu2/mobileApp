@@ -34,6 +34,12 @@ const QRScanner = ({navigation}) => {
           bottomContent={<Text>{message}</Text>}
         />
       </View>
+    </View>
+  );
+};
+
+/**
+      
       <View style={styles.ref}>
         <Text>Veya Referans Kodu İle Dosya Yükle;</Text>
 
@@ -42,10 +48,7 @@ const QRScanner = ({navigation}) => {
           placeholder="Referans Kodu"
           placeholderTextColor="black"
         />
-      </View>
-    </View>
-  );
-};
+      </View> */
 
 const styles = StyleSheet.create({
   container: {
