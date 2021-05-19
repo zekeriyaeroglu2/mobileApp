@@ -10,7 +10,8 @@ import Provider from './context/Provider';
 import Routing from './routing/Routing';
 
 //global
-//global.API_URL = 'http://192.168.1.22/proapp';
+//global.API_URL = 'http://192.168.1.26/proapp';
+//global.API_URL = 'http://192.168.1.150/proapp';
 
 global.API_URL = 'https://proapp.codigno.com/index.php';
 

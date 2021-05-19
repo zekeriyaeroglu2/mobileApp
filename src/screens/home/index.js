@@ -37,7 +37,9 @@ const HomeScreen = ({route, navigation}) => {
             title=" QR Kod İle Dosya Yükle"
             onPress={() => {
               uploadChooseToggleModal();
-              navigation.navigate('qrscanner');
+              navigation.navigate('fileupload', {
+                data: '{"refID":593, "refType":"request"}',
+              });
             }}
           />
 

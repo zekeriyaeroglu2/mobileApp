@@ -137,7 +137,7 @@ const LoginScreen = ({route, navigation}) => {
           type: 'success',
           icon: {icon: 'auto', position: 'left'},
         });
-        let token = userData.token;
+        let token = String(userData.token);
         let userEmail = userData.userEmail;
         AsyncStorage.setItem('userData', JSON.stringify(userData));
         AsyncStorage.setItem('token', token);

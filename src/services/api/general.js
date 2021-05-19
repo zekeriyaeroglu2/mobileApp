@@ -20,7 +20,6 @@ export function logApi(data) {
   fd.append('addDate', DateHelper.getCurDate());
   fd.append('model', model);
   fd.append('systemName', os);
-  console.log(fd);
   axios
     .post(global.API_URL + CONTROLLER + '/logApi', fd)
     .then(response => {
