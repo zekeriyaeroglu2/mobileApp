@@ -13,6 +13,8 @@ import Context from '../../context/store';
 import generalStyle from '../../styles/general';
 import styles from './style';
 
+import {showMessage} from 'react-native-flash-message';
+
 import fileAPI from '../../services/api/file';
 
 const HomeScreen = ({route, navigation}) => {
@@ -21,7 +23,6 @@ const HomeScreen = ({route, navigation}) => {
   const [photo, setphoto] = useState();
   const [loading, setloading] = useState(true);
   const [bottomSheetVisible, setbottomSheetVisible] = useState(false);
-  const [response, setresponse] = useState();
 
   const {state, dispatch} = useContext(Context);
   useEffect(() => {
@@ -50,24 +51,25 @@ const HomeScreen = ({route, navigation}) => {
   const handleChoosePhoto = () => {
     ImagePicker.launchImageLibrary(
       {title: reference.type + 'İçin Fotoğraf Seç'},
-      response => {
-        if (response.uri) {
-          setphoto(response);
-          console.log(response);
+      res => {
+        if (res.uri) {
+          setphoto(res);
+          console.log(res);
         }
       },
     );
   };
 
   const handleTakePhoto = () => {
-    ImagePicker.launchCamera({cameraType: 'Back'}, response => {
-      if (response.uri) {
-        setphoto(response);
+    ImagePicker.launchCamera({cameraType: 'Back'}, res => {
+      if (res.uri) {
+        setphoto(res);
       }
     });
   };
 
   const handleSubmitImage = () => {
+    setloading(true);
     fileAPI.FileUpload(
       {
         refID: data.refID,
@@ -78,8 +80,15 @@ const HomeScreen = ({route, navigation}) => {
         customerCode: state.customerCode,
       },
       res => {
-        console.log(res);
-        setresponse(JSON.stringify(res));
+        if (res.status) {
+          setloading(false);
+          showMessage({
+            message: res.message,
+            type: 'success',
+            icon: {icon: 'auto', position: 'left'},
+          });
+          setphoto(null);
+        }
       },
     );
   };
@@ -120,7 +129,6 @@ const HomeScreen = ({route, navigation}) => {
         <Text>{reference.type} Numarası : </Text>
         <Text style={{fontWeight: 'bold'}}>{reference.code}</Text>
       </View>
-      <Text>{response}</Text>
       <Button
         buttonStyle={styles.choosePhotoBtn}
         title="Fotoğraf seç"
