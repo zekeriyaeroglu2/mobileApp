@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Button} from 'react-native-elements';
 
 import Context from '../../context/store';
 import styles from './style';
@@ -55,8 +56,17 @@ const AccountScreen = ({route, navigation}) => {
       <Text> Adı Soyadı: {user.userName} </Text>
       <Text> E-Posta: {user.userEmail}</Text>
       <Text> Kullanıcı Grubu: {user.groupName}</Text>
-      <Text onPress={userLogout}>Kullanıcı Hesabından Çıkış Yap</Text>
-      <Text onPress={logout}>Müşteri değiştir</Text>
+
+      <Button
+        buttonStyle={{marginTop: 10}}
+        title="Çıkış Yap"
+        onPress={userLogout}
+      />
+      <Button
+        buttonStyle={{marginTop: 10}}
+        title="Müşteri değiştir"
+        onPress={logout}
+      />
     </View>
   );
 };

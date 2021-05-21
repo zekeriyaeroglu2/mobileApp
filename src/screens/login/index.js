@@ -1,4 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from 'react';
 import {
   Text,
   View,
@@ -16,6 +22,9 @@ import {showMessage} from 'react-native-flash-message';
 import loginAPI from '../../services/api/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import dateHelper from '../../helper/dateHelper';
+import FastImage from 'react-native-fast-image';
+
+import Recaptcha from 'react-native-recaptcha-that-works';
 
 const LoginScreen = ({route, navigation}) => {
   const [customer, setCustomer] = useState('');
@@ -29,6 +38,14 @@ const LoginScreen = ({route, navigation}) => {
   const [color, setColor] = useState();
 
   const {state, dispatch} = useContext(Context);
+
+  const $recaptcha = useRef();
+
+  const handleOpenCaptchaPress = useCallback(() => {
+    setTimeout(() => {
+      $recaptcha.current.open();
+    }, 500);
+  }, []);
 
   useEffect(() => {
     let componentMounted = true;
@@ -148,6 +165,9 @@ const LoginScreen = ({route, navigation}) => {
       } else {
         setIsLoading(false);
         setTryNum(tryNum + 1);
+        if (tryNum >= 1 && tryNum <= 3) {
+          handleOpenCaptchaPress();
+        }
         if (tryNum >= 4) {
           setUserLoginTryCount();
         }
@@ -167,9 +187,7 @@ const LoginScreen = ({route, navigation}) => {
     <View style={[styles.container, {backgroundColor: color}]}>
       <View style={styles.header}>
         <Animatable.Image
-          source={{
-            uri: logo,
-          }}
+          source={require('../../image/logo/logo.png')}
           style={styles.logo}
           resizeMode="stretch"
           animation="fadeInDown"
@@ -219,6 +237,17 @@ const LoginScreen = ({route, navigation}) => {
               )}
             </LinearGradient>
           </TouchableOpacity>
+          <Recaptcha
+            ref={$recaptcha}
+            siteKey="6LejsqwZAAAAAGsmSDWH5g09dOyNoGMcanBllKPF"
+            baseUrl="http://127.0.0.1"
+            onVerify={() => {
+              console.log('verify');
+            }}
+            onExpire={() => {
+              console.log('expire');
+            }}
+          />
         </View>
       </Animatable.View>
     </View>

@@ -1,4 +1,10 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+  useCallback,
+} from 'react';
 import {
   Text,
   View,
@@ -17,6 +23,8 @@ import {showMessage} from 'react-native-flash-message';
 import loginAPI from '../../services/api/login';
 import dateHelper from '../../helper/dateHelper';
 
+import Recaptcha from 'react-native-recaptcha-that-works';
+
 const StartScreen = ({navigation}) => {
   const [customerCode, setCustomerCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +32,14 @@ const StartScreen = ({navigation}) => {
   const [blockDate, setBlockDate] = useState('');
 
   const {state, dispatch} = useContext(Context);
+
+  const $recaptcha = useRef();
+
+  const handleOpenCaptchaPress = useCallback(() => {
+    setTimeout(() => {
+      $recaptcha.current.open();
+    }, 500);
+  }, []);
 
   useEffect(() => {
     getCustomerTryCount();
@@ -35,13 +51,13 @@ const StartScreen = ({navigation}) => {
 
   const getCustomerTryCount = async () => {
     try {
-      await AsyncStorage.clear();
+      //await AsyncStorage.clear();
       const cusTryCount = await AsyncStorage.getItem('@customerTryCount');
       const cusBlockDate = await AsyncStorage.getItem('@customerBlockDate');
       const cusBlockHm = await AsyncStorage.getItem('@customerBlockHm');
-      if (cusBlockDate < dateHelper.getCurDate()) {
+      if (cusBlockDate <= dateHelper.getCurDate()) {
         await AsyncStorage.clear();
-        await setTryNum(0);
+        await setTryNum(10);
         await setBlockDate('');
       }
       if (cusTryCount !== null) {
@@ -78,7 +94,6 @@ const StartScreen = ({navigation}) => {
         type: 'danger',
         icon: {icon: 'auto', position: 'left'},
       });
-
       setIsLoading(false);
     } else {
       loginAPI.selectCustomer(customerCode, data => {
@@ -94,6 +109,9 @@ const StartScreen = ({navigation}) => {
           });
         } else {
           setTryNum(tryNum + 1);
+          if (tryNum >= 1 && tryNum <= 3) {
+            handleOpenCaptchaPress();
+          }
           if (tryNum >= 4) {
             setCustomerTryCount();
           }
@@ -150,6 +168,17 @@ const StartScreen = ({navigation}) => {
               )}
             </LinearGradient>
           </TouchableOpacity>
+          <Recaptcha
+            ref={$recaptcha}
+            siteKey="6LejsqwZAAAAAGsmSDWH5g09dOyNoGMcanBllKPF"
+            baseUrl="http://127.0.0.1"
+            onVerify={() => {
+              console.log('verify');
+            }}
+            onExpire={() => {
+              console.log('expire');
+            }}
+          />
         </View>
       </Animatable.View>
     </View>

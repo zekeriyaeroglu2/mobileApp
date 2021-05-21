@@ -14,7 +14,6 @@ export default function TabNavigator() {
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
-          console.log(route.name);
           if (route.name === 'Anasayfa') {
             iconName = 'home';
           } else if (route.name === 'Hesap') {

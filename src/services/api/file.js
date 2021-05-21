@@ -42,6 +42,7 @@ export function RefInfo(data, callback) {
           type: 'danger',
           icon: {icon: 'auto', position: 'left'},
         });
+        callback(false);
         logData.errorCode = error.response.data.error_code;
         logData.others = JSON.stringify(error.response.data);
       }

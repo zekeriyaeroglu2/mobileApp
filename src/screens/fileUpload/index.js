@@ -39,6 +39,8 @@ const HomeScreen = ({route, navigation}) => {
           if (refData) {
             setreference(refData);
             setloading(false);
+          } else {
+            navigation.navigate('home');
           }
         },
       );

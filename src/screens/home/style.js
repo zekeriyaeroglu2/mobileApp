@@ -19,6 +19,16 @@ const styles = StyleSheet.create({
   qrBtn: {
     marginBottom: 30,
   },
+  refCode: {
+    height: 50,
+    width: '100%',
+    marginBottom: 10,
+    padding: 10,
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: '#1b4074',
+    color: 'black',
+  },
 });
 
 export default styles;
