@@ -22,7 +22,6 @@ import {showMessage} from 'react-native-flash-message';
 import loginAPI from '../../services/api/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import dateHelper from '../../helper/dateHelper';
-import FastImage from 'react-native-fast-image';
 
 import Recaptcha from 'react-native-recaptcha-that-works';
 
