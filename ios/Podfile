@@ -12,7 +12,7 @@ target 'mobile' do
     :hermes_enabled => false
   )
 
-  target 'erpTests' do
+  target 'mobileTests' do
     inherit! :complete
     # Pods for testing
   end
