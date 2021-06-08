@@ -14,7 +14,6 @@
 		695E3239266F777C00D09C81 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 695E3238266F777C00D09C81 /* MaterialIcons.ttf */; };
 		69758939266E9A7A006616DB /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69758938266E9A7A006616DB /* AppCenter-Config.plist */; };
 		69BC72D8266F5EC000FA441E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69BC72D7266F5EC000FA441E /* FontAwesome.ttf */; };
-		69BCFAD6266E5C00001889EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69BCFAD5266E5C00001889EA /* Images.xcassets */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9982B90855E64B5792624B65 /* libPods-mobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 952ABE1BF9F861BA933DF571 /* libPods-mobile.a */; };
 		9F02B9C74C4D0FF7CF0926F3 /* libPods-mobile-mobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E545A593C55DF2C74FC966 /* libPods-mobile-mobileTests.a */; };
@@ -257,7 +256,6 @@
 				695E3239266F777C00D09C81 /* MaterialIcons.ttf in Resources */,
 				69BC72D8266F5EC000FA441E /* FontAwesome.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				69BCFAD6266E5C00001889EA /* Images.xcassets in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				69758939266E9A7A006616DB /* AppCenter-Config.plist in Resources */,
 			);
