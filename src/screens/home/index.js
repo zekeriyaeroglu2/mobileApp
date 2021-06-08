@@ -98,9 +98,7 @@ const HomeScreen = ({route, navigation}) => {
             title=" QR Kod İle Dosya Yükle"
             onPress={() => {
               uploadChooseToggleModal();
-              navigation.navigate('qrscanner', {
-                data: '{"refID":593, "refType":"request"}',
-              });
+              navigation.navigate('qrscanner');
             }}
           />
 
@@ -109,7 +107,10 @@ const HomeScreen = ({route, navigation}) => {
             title=" Referans Kodu İle Dosya Yükle"
             onPress={() => {
               uploadChooseToggleModal();
-              uploadByRefToggleModal();
+              setTimeout(() => {
+                setUploadByRef(true);
+              }, 400);
+              //uploadByRefToggleModal();
             }}
           />
 

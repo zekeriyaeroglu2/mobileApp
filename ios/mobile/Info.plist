@@ -25,7 +25,7 @@
 	<key>CodePushDeploymentKey</key>
 	<string>A6_YNe-WVXjNi2535uwIcUKF8mZM47g79TWEZ</string>
 	<key>CodePushPublicKey</key>
-	<string>&lt;plist version="1.0"&gt;
+	<string>&lt;plist version=&quot;1.0&quot;&gt;
   &lt;dict&gt;
     &lt;!-- ...other configs... --&gt;
 
@@ -61,6 +61,7 @@ MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANkWYydPuyOumR/sn2agNBVDnzyRpM16NAUpYPGxNgjSEp0e
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
+		<string>MaterialIcons.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

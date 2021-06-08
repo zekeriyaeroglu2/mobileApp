@@ -25,7 +25,7 @@ export default function TabNavigator() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: 'blue',
+        activeTintColor: '#1b4373',
         inactiveTintColor: 'gray',
         showIcon: true,
         showLabel: false,
