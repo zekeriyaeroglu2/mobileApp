@@ -128,7 +128,7 @@ const HomeScreen = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.refInfo}>
-        <Text>{reference.type} Numarası : </Text>
+        <Text>{reference.type} : </Text>
         <Text style={{fontWeight: 'bold'}}>{reference.code}</Text>
       </View>
       <Button
