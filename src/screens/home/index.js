@@ -49,6 +49,14 @@ const HomeScreen = ({route, navigation}) => {
             refTypeParsed = 'receiving';
             break;
 
+          case 'RK':
+            refTypeParsed = 'guidecontact';
+            break;
+
+          case 'TK':
+            refTypeParsed = 'supplierContact';
+            break;
+
           default:
             showMessage({
               message: 'Referans tipi bulunamadı!',
