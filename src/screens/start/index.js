@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   TextInput,
   ActivityIndicator,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import Context from '../../context/store';
@@ -25,7 +25,7 @@ import loginAPI from '../../services/api/login';
 import dateHelper from '../../helper/dateHelper';
 
 import Recaptcha from 'react-native-recaptcha-that-works';
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
 
 const StartScreen = ({navigation}) => {
   const [customerCode, setCustomerCode] = useState('');
@@ -124,7 +124,9 @@ const StartScreen = ({navigation}) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={styles.header}>
         <Animatable.Image
           source={require('../../image/logo/logo.png')}
