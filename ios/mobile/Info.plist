@@ -17,15 +17,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CodePushDeploymentKey</key>
 	<string>A6_YNe-WVXjNi2535uwIcUKF8mZM47g79TWEZ</string>
 	<key>CodePushPublicKey</key>
-	<string>&lt;plist version=&quot;1.0&quot;&gt;
+	<string>&lt;plist version="1.0"&gt;
   &lt;dict&gt;
     &lt;!-- ...other configs... --&gt;
 
@@ -37,6 +37,8 @@ MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANkWYydPuyOumR/sn2agNBVDnzyRpM16NAUpYPGxNgjSEp0e
     &lt;!-- ...other configs... --&gt;
   &lt;/dict&gt;
 &lt;/plist&gt;</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -50,10 +52,12 @@ MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANkWYydPuyOumR/sn2agNBVDnzyRpM16NAUpYPGxNgjSEp0e
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Müzik için kullanım izni gerekiyor.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>QR Kod ile tarama yapabilmek için kamera izni gerekiyor.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Konum izni gerekiyor.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Video kayıt için mikrofon izni gerekiyor.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

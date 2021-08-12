@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   TextInput,
   ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import Context from '../../context/store';
@@ -183,7 +184,7 @@ const LoginScreen = ({route, navigation}) => {
   }
 
   return (
-    <View style={[styles.container, {backgroundColor: color}]}>
+    <KeyboardAvoidingView style={[styles.container, {backgroundColor: color}]} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={0}>
       <View style={styles.header}>
         <Animatable.Image
           source={require('../../image/logo/logo.png')}
@@ -249,7 +250,7 @@ const LoginScreen = ({route, navigation}) => {
           />
         </View>
       </Animatable.View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 export default LoginScreen;
