@@ -57,6 +57,10 @@ const HomeScreen = ({route, navigation}) => {
             refTypeParsed = 'supplierContact';
             break;
 
+          case 'SPR':
+            refTypeParsed = 'orderform';
+            break;
+
           default:
             showMessage({
               message: 'Referans tipi bulunamadı!',
