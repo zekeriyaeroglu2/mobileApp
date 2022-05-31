@@ -8,8 +8,7 @@ const CONTROLLER = '/file';
 
 export function RefInfo(data, callback) {
   var fd = new FormData();
-  fd.append('refID', data.refID);
-  fd.append('refType', data.refType);
+  fd.append('ref', data.ref);
   fd.append('customerCode', data.customerCode);
   fd.append('token', data.token);
 
@@ -54,8 +53,7 @@ export function RefInfo(data, callback) {
 
 export function FileUpload(data, callback) {
   var fd = new FormData();
-  fd.append('refID', data.refID);
-  fd.append('refType', data.refType);
+  fd.append('ref', data.ref);
   fd.append('customerCode', data.customerCode);
   fd.append('token', data.token);
   fd.append('photo', {

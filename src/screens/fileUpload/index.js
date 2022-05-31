@@ -29,8 +29,7 @@ const HomeScreen = ({route, navigation}) => {
     const getRefInfo = () => {
       fileAPI.RefInfo(
         {
-          refID: data.refID,
-          refType: data.refType,
+          ref: data.ref,
           email: state.userEmail,
           token: state.token,
           customerCode: state.customerCode,
@@ -74,8 +73,7 @@ const HomeScreen = ({route, navigation}) => {
     setloading(true);
     fileAPI.FileUpload(
       {
-        refID: data.refID,
-        refType: data.refType,
+        ref: data.ref,
         fileData: photo,
         email: state.userEmail,
         token: state.token,

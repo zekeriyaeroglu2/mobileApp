@@ -32,63 +32,11 @@ const HomeScreen = ({route, navigation}) => {
 
   const checkRefCode = () => {
     if (typeof refCode !== 'undefined') {
-      var [refType, refID] = refCode.split('#');
-      var refTypeParsed,
-        checked = true;
-      if (
-        typeof refType !== 'undefined' &&
-        typeof refID !== 'undefined' &&
-        !isNaN(refID)
-      ) {
-        switch (refType) {
-          case 'TLP':
-            refTypeParsed = 'request';
-            break;
-
-          case 'STA':
-            refTypeParsed = 'receiving';
-            break;
-
-          case 'RK':
-            refTypeParsed = 'guidecontact';
-            break;
-
-          case 'TK':
-            refTypeParsed = 'supplierContact';
-            break;
-
-          case 'SPR':
-            refTypeParsed = 'orderform';
-            break;
-
-          default:
-            showMessage({
-              message: 'Referans tipi bulunamadı!',
-              type: 'danger',
-              icon: {icon: 'auto', position: 'left'},
-            });
-            checked = false;
-            break;
-        }
-        if (checked) {
-          var data =
-            '{"refID" : ' +
-            parseInt(refID) +
-            ', "refType" : "' +
-            refTypeParsed +
-            '"}';
-          uploadByRefToggleModal();
-          navigation.navigate('fileupload', {
-            data: data,
-          });
-        }
-      } else {
-        showMessage({
-          message: 'Referans Kodu Geçersiz!',
-          type: 'danger',
-          icon: {icon: 'auto', position: 'left'},
-        });
-      }
+      var data = '{"ref" : "' + refCode + '"}';
+      uploadByRefToggleModal();
+      navigation.navigate('fileupload', {
+        data: data,
+      });
     }
   };
 
